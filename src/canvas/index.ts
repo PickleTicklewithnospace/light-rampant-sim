@@ -48,7 +48,7 @@ export function drawConnectors() {
 
   ctx.clearRect(0,0,canvas.width,canvas.height);
   ctx.beginPath();
-  ctx.strokeStyle="#15a5ed";
+  ctx.strokeStyle="#ffe54a";
   ctx.lineWidth=3;
 
   const visited = new Set<string>([firstPerson.id]);

@@ -4,11 +4,14 @@
         .draggable {
             position: absolute;
             top: 0;
-            height: 60px;
-            width: 60px;
-            text-align: center;
-            line-height: 60px;
+            height: 4vw;
+            width: 4vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /*line-height: 60px;*/
             border-radius: 50%;
+            border: black 2px solid;
         }
         .dps {
             background: #ec5858;
@@ -42,6 +45,7 @@
     </style>
 </head>
 <body>
+
 <div>
     <form class="formContainer" id="selectorForm">
         <div>
@@ -108,20 +112,10 @@
 <div>
     Current path: <span id="path"></span>
 </div>
-<div style="position:relative;">
+
+<div id="playerContainer" style="position:relative; width: 80vh; height: 80vh; background-position: center; background-size: contain; background-image: url(./img/shivaarena.png); background-repeat: no-repeat">
     <canvas id="canvas" class="canvas"></canvas>
-    <div id="mt" class="draggable tank" style="left: 20%; top: 0%">mt</div>
-    <div id="d3" class="draggable dps" style="left: 10%; top: 10%">d3</div>
-    <div id="h1" class="draggable healer" style="left: 0%; top: 20%">h1</div>
 
-
-    <div id="d1" class="draggable dps" style="left: 10%; top: 30%">d1</div>
-    <div id="st" class="draggable tank" style="left: 20%; top: 40%">st</div>
-
-
-    <div id="d2" class="draggable dps" style="left: 30%; top: 30%">d2</div>
-    <div id="h2" class="draggable healer" style="left: 40%; top: 20%">h2</div>
-    <div id="d4" class="draggable dps" style="left: 30%; top: 10%">d4</div>
 </div>
 <script src="src/index.ts"></script>
 

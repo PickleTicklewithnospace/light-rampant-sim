@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "homepage": "https://pickleticklewithnospace.github.io/light-rampant-sim/",
   "scripts": {
     "start": "parcel serve index.html",
     "build": "cross-env NODE_ENV=production parcel build src/index.html --public-url .",

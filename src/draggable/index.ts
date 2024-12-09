@@ -1,6 +1,18 @@
 import {getElementById, targetHasId} from "../utils";
 import {drawConnectors} from "../canvas";
 
+function createPlayerDiv(name: string, role: string, positionX: string, positionY: string) {
+  const player = document.createElement('div');
+  player.id = name;
+  player.className = `draggable ${role}`;
+  player.style.left = positionX;
+  player.style.top = positionY;
+  player.innerText = name;
+  const container = getElementById('playerContainer');
+  container.appendChild(player);
+  return player;
+}
+
 let clickedDiv = '';
 let clickedDivPos = { x:0, y:0 };
 export const getDraggables = () => {
@@ -17,6 +29,44 @@ export const getDraggables = () => {
 
   return allDraggables.filter((d) => !d.classList.contains('aoe1') && !d.classList.contains('aoe2'));
 };
+
+const container = getElementById('playerContainer');
+
+container.clientHeight;
+const originX = container.clientWidth/2 - 25;
+const originY = container.clientHeight/2 - 25;
+const r = 150;
+const n = 8;
+const nameToRole = {
+  mt: 'tank',
+  st: 'tank',
+  h1: 'healer',
+  h2: 'healer',
+  d1: 'dps',
+  d2: 'dps',
+  d3: 'dps',
+  d4: 'dps',
+};
+const names = ['mt', 'st', 'd1', 'd2', 'h1', 'h2', 'd3', 'd4'] as const;
+for (let i = 0; i < n; i++) {
+  const name = names[i];
+  const role = nameToRole[name];
+  const x = originX + r * Math.cos(2 * Math.PI * i / n);
+  const y = originY + r * Math.sin(2 * Math.PI * i / n)
+  createPlayerDiv(name, role, `${x}px`, `${y}px`);
+  // createPlayerDiv('mt', 'tank', '50%', '30%');
+  // createPlayerDiv('st', 'tank', '50%', '70%');
+  // createPlayerDiv('d3', 'dps', '30%', '40%');
+  // createPlayerDiv('d4', 'dps', '70%', '40%');
+  //
+  //
+  // createPlayerDiv('h1', 'healer', '25%', '50%');
+  // createPlayerDiv('h2', 'healer', '75%', '50%');
+  //
+  //
+  // createPlayerDiv('d1', 'dps', '10%', '30%');
+  // createPlayerDiv('d2', 'dps', '30%', '30%');
+}
 export const allDraggables: HTMLElement[] = [
   getElementById('d1'),
   getElementById('d2'),
@@ -27,7 +77,8 @@ export const allDraggables: HTMLElement[] = [
   getElementById('mt'),
   getElementById('st'),
 ];
-
+const prevBoarder = getElementById('d1').style.border;
+const clickedBoarder = "2px solid blue";
 function onMouseDown(e: MouseEvent) {
   e.preventDefault();
   if (e.target === null || !targetHasId(e.target)) return;
@@ -35,7 +86,7 @@ function onMouseDown(e: MouseEvent) {
   clickedDivPos.x = e.clientX;
   clickedDivPos.y = e.clientY;
   // show which div is being clicked
-  e.target.style.border = "2px solid blue";
+  e.target.style.border = clickedBoarder;
 
   // put clicked div on top
   e.target.style.zIndex = allDraggables.length.toString();
@@ -56,7 +107,7 @@ function onMouseMove(e: MouseEvent) {
 function onMouseUp(e: MouseEvent) {
   e.preventDefault();
   if (clickedDiv === "") return;
-  getElementById(clickedDiv).style.border = "none";             // hide the border again
+  getElementById(clickedDiv).style.border = prevBoarder;
   clickedDiv = "";
 }
 

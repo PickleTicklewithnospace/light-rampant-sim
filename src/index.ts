@@ -1,6 +1,5 @@
 import {getElementById} from "./utils";
 import {drawConnectors} from "./canvas";
-import {allDraggables} from "./draggable";
 
 const canvas = getElementById('canvas') as HTMLCanvasElement;
 
