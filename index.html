@@ -1,0 +1,129 @@
+<html>
+<head>
+    <style>
+        .draggable {
+            position: absolute;
+            top: 0;
+            height: 60px;
+            width: 60px;
+            text-align: center;
+            line-height: 60px;
+            border-radius: 50%;
+        }
+        .dps {
+            background: #ec5858;
+        }
+        .healer {
+            background: #58ec58;
+        }
+
+        .tank {
+            background: #6a83ff;
+        }
+        .formContainer {
+            display: flex;
+        }
+        .formContainer > div {
+            flex: 1;
+        }
+        .aoe1 {
+            background: rgba(255, 255, 255, 0.37);
+            box-shadow:0 0 50px #ff0000;
+        }
+
+        .aoe2 {
+            background: rgba(255, 255, 255, 0.37);
+            box-shadow:0 0 50px #ff0000;
+        }
+        .firstTarget {
+            background: rgb(255, 203, 86);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <form class="formContainer" id="selectorForm">
+        <div>
+            <p>AOE 1 target</p>
+            <input type="radio" id="aoe1d1" name="aoe1" value="d1">
+            <label for="aoe1d1">D1</label><br>
+            <input type="radio" id="aoe1d2" name="aoe1" value="d2">
+            <label for="aoe1d2">D2</label><br>
+            <input type="radio" id="aoe1d3" name="aoe1" value="d3">
+            <label for="aoe1d3">D3</label><br>
+            <input type="radio" id="aoe1d4" name="aoe1" value="d4">
+            <label for="aoe1d4">D4</label><br>
+            <input type="radio" id="aoe1h1" name="aoe1" value="h1">
+            <label for="aoe1h1">H1</label><br>
+            <input type="radio" id="aoe1h2" name="aoe1" value="h2">
+            <label for="aoe1h2">H2</label><br>
+            <input type="radio" id="aoe1mt" name="aoe1" value="mt">
+            <label for="aoe1mt">MT</label><br>
+            <input type="radio" id="aoe1st" name="aoe1" value="st">
+            <label for="aoe1st">ST</label><br>
+        </div>
+
+        <div>
+            <p>AOE 2 target</p>
+            <input type="radio" id="aoe2d1" name="aoe2" value="d1">
+            <label for="aoe2d1">D1</label><br>
+            <input type="radio" id="aoe2d2" name="aoe2" value="d2">
+            <label for="aoe2d2">D2</label><br>
+            <input type="radio" id="aoe2d3" name="aoe2" value="d3">
+            <label for="aoe2d3">D3</label><br>
+            <input type="radio" id="aoe2d4" name="aoe2" value="d4">
+            <label for="aoe2d4">D4</label><br>
+            <input type="radio" id="aoe2h1" name="aoe2" value="h1">
+            <label for="aoe2h1">H1</label><br>
+            <input type="radio" id="aoe2h2" name="aoe2" value="h2">
+            <label for="aoe2h2">H2</label><br>
+            <input type="radio" id="aoe2mt" name="aoe2" value="mt">
+            <label for="aoe2mt">MT</label><br>
+            <input type="radio" id="aoe2st" name="aoe2" value="st">
+            <label for="aoe2st">ST</label><br>
+        </div>
+
+        <div>
+            <p>First Target</p>
+            <input type="radio" id="firstd1" name="first" value="d1">
+            <label for="firstd1">D1</label><br>
+            <input type="radio" id="firstd2" name="first" value="d2">
+            <label for="firstd2">D2</label><br>
+            <input type="radio" id="firstd3" name="first" value="d3">
+            <label for="firstd3">D3</label><br>
+            <input type="radio" id="firstd4" name="first" value="d4">
+            <label for="firstd4">D4</label><br>
+            <input type="radio" id="firsth1" name="first" value="h1">
+            <label for="firsth1">H1</label><br>
+            <input type="radio" id="firsth2" name="first" value="h2">
+            <label for="firsth2">H2</label><br>
+            <input type="radio" id="firstmt" name="first" value="mt">
+            <label for="firstmt">MT</label><br>
+            <input type="radio" id="firstst" name="first" value="st">
+            <label for="firstst">ST</label>
+        </div>
+    </form>
+</div>
+<div>
+    Current path: <span id="path"></span>
+</div>
+<div style="position:relative;">
+    <canvas id="canvas" class="canvas"></canvas>
+    <div id="mt" class="draggable tank" style="left: 20%; top: 0%">mt</div>
+    <div id="d3" class="draggable dps" style="left: 10%; top: 10%">d3</div>
+    <div id="h1" class="draggable healer" style="left: 0%; top: 20%">h1</div>
+
+
+    <div id="d1" class="draggable dps" style="left: 10%; top: 30%">d1</div>
+    <div id="st" class="draggable tank" style="left: 20%; top: 40%">st</div>
+
+
+    <div id="d2" class="draggable dps" style="left: 30%; top: 30%">d2</div>
+    <div id="h2" class="draggable healer" style="left: 40%; top: 20%">h2</div>
+    <div id="d4" class="draggable dps" style="left: 30%; top: 10%">d4</div>
+</div>
+
+<script type="module" src="dist/src/index.js"></script>
+</body>
+</html>
