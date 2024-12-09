@@ -144,6 +144,17 @@ Object.defineProperty(exports, "__esModule", {
 exports.allDraggables = exports.getDraggables = void 0;
 var utils_1 = require("../utils");
 var canvas_1 = require("../canvas");
+function createPlayerDiv(name, role, positionX, positionY) {
+  var player = document.createElement('div');
+  player.id = name;
+  player.className = "draggable ".concat(role);
+  player.style.left = positionX;
+  player.style.top = positionY;
+  player.innerText = name;
+  var container = (0, utils_1.getElementById)('playerContainer');
+  container.appendChild(player);
+  return player;
+}
 var clickedDiv = '';
 var clickedDivPos = {
   x: 0,
@@ -156,7 +167,45 @@ var getDraggables = function getDraggables() {
   });
 };
 exports.getDraggables = getDraggables;
+var container = (0, utils_1.getElementById)('playerContainer');
+container.clientHeight;
+var originX = container.clientWidth / 2 - 25;
+var originY = container.clientHeight / 2 - 25;
+var r = 150;
+var n = 8;
+var nameToRole = {
+  mt: 'tank',
+  st: 'tank',
+  h1: 'healer',
+  h2: 'healer',
+  d1: 'dps',
+  d2: 'dps',
+  d3: 'dps',
+  d4: 'dps'
+};
+var names = ['mt', 'st', 'd1', 'd2', 'h1', 'h2', 'd3', 'd4'];
+for (var i = 0; i < n; i++) {
+  var name = names[i];
+  var role = nameToRole[name];
+  var x = originX + r * Math.cos(2 * Math.PI * i / n);
+  var y = originY + r * Math.sin(2 * Math.PI * i / n);
+  createPlayerDiv(name, role, "".concat(x, "px"), "".concat(y, "px"));
+  // createPlayerDiv('mt', 'tank', '50%', '30%');
+  // createPlayerDiv('st', 'tank', '50%', '70%');
+  // createPlayerDiv('d3', 'dps', '30%', '40%');
+  // createPlayerDiv('d4', 'dps', '70%', '40%');
+  //
+  //
+  // createPlayerDiv('h1', 'healer', '25%', '50%');
+  // createPlayerDiv('h2', 'healer', '75%', '50%');
+  //
+  //
+  // createPlayerDiv('d1', 'dps', '10%', '30%');
+  // createPlayerDiv('d2', 'dps', '30%', '30%');
+}
 exports.allDraggables = [(0, utils_1.getElementById)('d1'), (0, utils_1.getElementById)('d2'), (0, utils_1.getElementById)('d3'), (0, utils_1.getElementById)('d4'), (0, utils_1.getElementById)('h1'), (0, utils_1.getElementById)('h2'), (0, utils_1.getElementById)('mt'), (0, utils_1.getElementById)('st')];
+var prevBoarder = (0, utils_1.getElementById)('d1').style.border;
+var clickedBoarder = "2px solid blue";
 function onMouseDown(e) {
   e.preventDefault();
   if (e.target === null || !(0, utils_1.targetHasId)(e.target)) return;
@@ -164,7 +213,7 @@ function onMouseDown(e) {
   clickedDivPos.x = e.clientX;
   clickedDivPos.y = e.clientY;
   // show which div is being clicked
-  e.target.style.border = "2px solid blue";
+  e.target.style.border = clickedBoarder;
   // put clicked div on top
   e.target.style.zIndex = exports.allDraggables.length.toString();
   var i = 1;
@@ -186,7 +235,7 @@ function onMouseMove(e) {
 function onMouseUp(e) {
   e.preventDefault();
   if (clickedDiv === "") return;
-  (0, utils_1.getElementById)(clickedDiv).style.border = "none"; // hide the border again
+  (0, utils_1.getElementById)(clickedDiv).style.border = prevBoarder;
   clickedDiv = "";
 }
 for (var _i = 0, allDraggables_1 = exports.allDraggables; _i < allDraggables_1.length; _i++) {
@@ -247,7 +296,7 @@ function drawConnectors() {
   if (ctx === null) throw new Error('2d context not supported');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.beginPath();
-  ctx.strokeStyle = "#15a5ed";
+  ctx.strokeStyle = "#ffe54a";
   ctx.lineWidth = 3;
   var visited = new Set([firstPerson.id]);
   var visitedPath = [firstPerson.id];
@@ -325,7 +374,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62415" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51752" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
