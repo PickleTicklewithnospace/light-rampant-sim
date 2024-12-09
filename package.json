@@ -3,8 +3,16 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "start": "parcel serve index.html",
+    "build": "cross-env NODE_ENV=production parcel build src/index.html --public-url .",
+    "deploy": "gh-pages -d dist"
+  },
   "dependencies": {
     "@types/node": "^22.10.1",
+    "cross-env": "^7.0.3",
+    "gh-pages": "5.0.0",
+    "parcel-bundler": "^1.12.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
   }
